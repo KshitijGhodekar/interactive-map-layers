@@ -51,7 +51,7 @@ Engineering:
 
 ---
 
-###5. Layer Grouping by Category
+### 5. Layer Grouping by Category
 
 - Layers are categorized (e.g., Raised Bogs, Blanket Bogs).
 - Each group is collapsible with a toggle (➕ / ➖).
@@ -64,7 +64,7 @@ Implementation Logic:
 
 ---
 
-###6. UI & Styling
+### 6. UI & Styling
 - Sidebar with scrollable vertical layout.
 - Modern UI includes:
 - Rounded corners
