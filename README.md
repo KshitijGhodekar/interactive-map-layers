@@ -75,4 +75,4 @@ Implementation Logic:
 CSS Files:
 - GeoApp.css – layout and base styling
 - LayerItem.css – per-layer toggle, label, slider UI
-- LayerGroup.css (optional) – group collapse styles
+- LayerGroup.css – group collapse styles
