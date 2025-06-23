@@ -1,71 +1,74 @@
-# Getting Started with Create React App
+# Interactive Map Layers
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React + Leaflet based web application for interactive visualization, reordering, and control of geospatial data layers. This tool allows users to toggle layers, change their opacity, group them by category, and manage their display order on the map.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features and Engineering Breakdown
 
-### `npm start`
+### 1. Map Integration (Leaflet)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Uses `react-leaflet` to render maps using Leaflet.
+- `TileLayer` renders the OpenStreetMap base.
+- Custom geospatial data is visualized using `Rectangle` overlays.
+- Each layer has dynamic fill opacity and color.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+**Key Components:**
+- `MapContainer`, `TileLayer`, `Rectangle`
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2. Layer Toggling
 
-### `npm run build`
+- Toggle switches allow users to show/hide layers.
+- State management is handled with `useState` to reflect visibility.
+- Switch state updates map instantly.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Per-Layer Opacity Control
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Each enabled layer includes a range slider (0 to 1).
+- Sliders are only visible when the layer is enabled.
+- Opacity is stored in a dictionary using the layer `id`.
 
-### `npm run eject`
+const [layerOpacity, setLayerOpacity] = useState<{ [key: string]: number }>(
+  Object.fromEntries(initialProjectLayers.map(l => [l.id, 0.5]))
+);
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 4. Drag-and-Drop Layer Reordering
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Layers can be rearranged via drag-and-drop.
+- Ordering controls visual stacking on the map.
+- Implemented using @dnd-kit/core and @dnd-kit/sortable.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Engineering:
+- DndContext manages the drag environment.
+- SortableContext and SortableItem handle list reordering.
+- arrayMove() reorders the array in state.
 
-## Learn More
+5. Layer Grouping by Category
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Layers are categorized (e.g., Raised Bogs, Blanket Bogs).
+- Each group is collapsible with a toggle (➕ / ➖).
+- Improves UI clarity and navigability for large datasets.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Implementation Logic:
+- Layers are filtered by their group value.
+- Collapse state for each group is tracked in the LayerGroup component.
+- Group toggle switches control visibility of grouped layer items.
 
-### Code Splitting
+6. UI & Styling
+- Sidebar with scrollable vertical layout.
+- Modern UI includes:
+- Rounded corners
+- Hover effects
+- Smooth slider and toggle interactions
+- Responsive for small and large viewports.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# interactive-map-layers
+CSS Files:
+- GeoApp.css – layout and base styling
+- LayerItem.css – per-layer toggle, label, slider UI
+- LayerGroup.css (optional) – group collapse styles
