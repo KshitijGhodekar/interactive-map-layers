@@ -1,0 +1,31 @@
+.layer-group {
+    margin-bottom: 16px;
+  }
+  
+  .layer-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background-color: #2d3a42;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: white;
+  }
+  
+  .layer-group-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .layer-group-toggle {
+    font-size: 20px;
+    font-weight: bold;
+    user-select: none;
+  }
+  
+  .layer-group-content {
+    padding: 8px 4px 0 4px;
+  }
+  
