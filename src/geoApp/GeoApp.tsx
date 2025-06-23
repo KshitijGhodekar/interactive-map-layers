@@ -73,6 +73,23 @@ const GeoApp: React.FC = () => {
 
   return (
     <div className="geo-app">
+      <MapContainer center={[53.3, -6.3]} zoom={10} className="map">
+        {projectLayers.map(layer =>
+          layer.enabled ? (
+            <Rectangle
+              key={layer.id}
+              bounds={layer.bounds}
+              pathOptions={{
+                color: layer.color,
+                weight: 2,
+                fillOpacity: layerOpacity[layer.id] ?? 0.5,
+              }}
+            />
+          ) : null
+        )}
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      </MapContainer>
+
       <div className="sidebar">
         <div className="base-layers">
           <div className="base-preview">Default</div>
@@ -100,23 +117,6 @@ const GeoApp: React.FC = () => {
           </SortableContext>
         </DndContext>
       </div>
-
-      <MapContainer center={[53.3, -6.3]} zoom={10} className="map">
-        {projectLayers.map(layer =>
-          layer.enabled ? (
-            <Rectangle
-              key={layer.id}
-              bounds={layer.bounds}
-              pathOptions={{
-                color: layer.color,
-                weight: 2,
-                fillOpacity: layerOpacity[layer.id] ?? 0.5,
-              }}
-            />
-          ) : null
-        )}
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      </MapContainer>
     </div>
   );
 };
