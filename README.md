@@ -49,7 +49,9 @@ Engineering:
 - SortableContext and SortableItem handle list reordering.
 - arrayMove() reorders the array in state.
 
-5. Layer Grouping by Category
+---
+
+###5. Layer Grouping by Category
 
 - Layers are categorized (e.g., Raised Bogs, Blanket Bogs).
 - Each group is collapsible with a toggle (➕ / ➖).
@@ -60,7 +62,9 @@ Implementation Logic:
 - Collapse state for each group is tracked in the LayerGroup component.
 - Group toggle switches control visibility of grouped layer items.
 
-6. UI & Styling
+---
+
+###6. UI & Styling
 - Sidebar with scrollable vertical layout.
 - Modern UI includes:
 - Rounded corners
