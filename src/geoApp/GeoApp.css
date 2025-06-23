@@ -1,40 +1,42 @@
 .geo-app {
   display: flex;
+  flex-direction: row;
   height: 100vh;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.map {
-  flex: 1;
+  overflow: hidden;
 }
 
 .sidebar {
   width: 340px;
+  max-width: 100%;
   background: #ffffff;
   padding: 16px;
   overflow-y: auto;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #e0e0e0;
+  box-sizing: border-box;
+  z-index: 2;
 }
 
 .base-layers {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   justify-content: space-between;
   margin-bottom: 16px;
 }
 
 .base-preview {
+  flex: 1 1 48%;
   background: #e0e0e0;
-  padding: 8px 14px;
+  padding: 10px 0;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: #333;
-  cursor: pointer;
-  transition: background 0.3s;
   text-align: center;
-  flex: 1;
-  margin: 0 4px;
+  cursor: pointer;
+  transition:  0.3s;
 }
 
 .base-preview:hover {
@@ -46,14 +48,15 @@
 }
 
 .tab {
+  width: 100%;
   background: #f1f1f1;
   border: none;
-  padding: 10px 18px;
-  margin-right: 6px;
+  padding: 12px;
   cursor: pointer;
   border-radius: 5px;
   font-weight: 500;
-  transition: background 0.3s;
+  transition:  0.3s;
+  text-align: center;
 }
 
 .tab:hover {
@@ -75,6 +78,12 @@
   font-size: 14px;
   font-weight: 500;
   color: #333;
+}
+
+.map {
+  flex: 1;
+  height: 100vh;
+  z-index: 1;
 }
 
 input[type="checkbox"] {
@@ -100,47 +109,47 @@ button:hover {
   background-color: #ddd;
 }
 
-/* Responsive layout for mobile view */
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .geo-app {
     flex-direction: column;
-  }
-
-  .map {
-    height: 50vh !important;
-    width: 100%;
-    order: 1;
   }
 
   .sidebar {
     width: 100%;
     height: auto;
-    max-height: 50vh;
-    overflow-y: auto;
     border-right: none;
-    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #ddd;
     box-shadow: none;
-    order: 2;
     padding: 12px;
   }
 
   .base-layers {
-    gap: 8px;
-  }
-
-  .base-preview {
-    width: 100%;
-    text-align: center;
-  }
-
-  .tabs {
-    display: flex;
     justify-content: center;
-    margin-bottom: 12px;
   }
 
   .tab {
-    flex: 1;
-    margin: 0 6px;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .map {
+    height: calc(100vh - 420px); 
+    flex: none;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .base-preview {
+    font-size: 12px;
+    padding: 8px 0;
+  }
+
+  .tab {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  .sidebar {
+    padding: 10px;
   }
 }
