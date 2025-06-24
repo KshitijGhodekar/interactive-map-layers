@@ -73,4 +73,19 @@
     text-align: right;
     color: #555;
   }
+
+  .layer-order {
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    margin-right: 6px;
+    width: 30px;
+    display: inline-block;
+  }
+  
+  .layer-index {
+    font-weight: 500;
+    margin-right: 8px;
+    min-width: 20px;
+  }
   

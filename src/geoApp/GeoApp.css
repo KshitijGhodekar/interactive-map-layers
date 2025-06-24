@@ -104,6 +104,11 @@ button {
   cursor: pointer;
   transition: 0.3s;
 }
+.base-preview.active {
+  background-color: #007BFF;
+  color: white;
+}
+
 
 button:hover {
   background-color: #ddd;

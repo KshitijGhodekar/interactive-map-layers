@@ -1,5 +1,5 @@
-import React from 'react';
-import './LayerItem.css';
+import React from "react";
+import "./LayerItem.css";
 
 interface Props {
   id: string;
@@ -10,19 +10,29 @@ interface Props {
   onToggle: () => void;
   onSliderToggle: () => void;
   onOpacityChange: (value: number) => void;
+  index: number;
 }
 
 const LayerItem: React.FC<Props> = ({
-  name, enabled, opacity, isActive, onToggle, onSliderToggle, onOpacityChange
+  name,
+  enabled,
+  opacity,
+  index,
+  onToggle,
+  onSliderToggle,
+  onOpacityChange,
 }) => {
   return (
     <div className="layer-item">
       <div className="layer-toggle">
+        <div className="layer-index">{index}</div>
         <label className="switch">
           <input type="checkbox" checked={enabled} onChange={onToggle} />
           <span className="slider round"></span>
         </label>
-        <span className="layer-label" onClick={onSliderToggle}>{name}</span>
+        <span className="layer-label" onClick={onSliderToggle}>
+          {name}
+        </span>
       </div>
 
       {enabled && (
@@ -33,8 +43,8 @@ const LayerItem: React.FC<Props> = ({
             max={1}
             step={0.01}
             value={opacity}
-            onChange={e => onOpacityChange(parseFloat(e.target.value))}
-            onPointerDown={e => e.stopPropagation()}
+            onChange={(e) => onOpacityChange(parseFloat(e.target.value))}
+            onPointerDown={(e) => e.stopPropagation()}
           />
           <div className="opacity-display">{Math.round(opacity * 100)}%</div>
         </div>

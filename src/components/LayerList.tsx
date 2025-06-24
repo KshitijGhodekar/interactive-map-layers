@@ -29,27 +29,31 @@ const LayerList: React.FC<Props> = ({
   const renderLayerGroup = (groupName: string) => (
     <LayerGroup title={groupName} key={groupName}>
       {layers
-        .filter(layer => layer.group === groupName)
-        .map(layer => (
-          <SortableItem key={layer.id} id={layer.id}>
-            <LayerItem
-              id={layer.id}
-              name={layer.name}
-              enabled={layer.enabled}
-              opacity={layer.opacity}
-              isActive={activeSliderId === layer.id}
-              onToggle={() => toggleLayer(layer.id)}
-              onSliderToggle={() =>
-                setActiveSliderId(prev => (prev === layer.id ? null : layer.id))
-              }
-              onOpacityChange={(val) => updateOpacity(layer.id, val)}
-            />
-          </SortableItem>
-        ))}
+  .filter(layer => layer.group === groupName)
+  .map((layer, index, arr) => {
+    const position = arr.length - index;
+    return (
+      <SortableItem key={layer.id} id={layer.id}>
+        <LayerItem
+          id={layer.id}
+          name={layer.name}
+          enabled={layer.enabled}
+          opacity={layer.opacity}
+          isActive={activeSliderId === layer.id}
+          onToggle={() => toggleLayer(layer.id)}
+          onSliderToggle={() =>
+            setActiveSliderId(prev => (prev === layer.id ? null : layer.id))
+          }
+          onOpacityChange={(val) => updateOpacity(layer.id, val)}
+          index={position}
+        />
+      </SortableItem>
+    );
+  })}
+
     </LayerGroup>
   );
 
-  // Detect unique group names
   const groups = [...new Set(layers.map(layer => layer.group))];
 
   return (
