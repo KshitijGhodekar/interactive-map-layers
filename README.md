@@ -79,7 +79,7 @@ CSS Files:
 
 ---
 
- ### NOTE: Persisting User Settings
+ ### NOTE: Persisting User Settings (To save User Specific)
  
 The `layerOpacity` and `activeSliderId` states represent user-specific settings for customizing the visibility and appearance of map layers. To maintain a consistent experience across   sessions and devices, these settings can be saved in a backend database linked to the user's account.
  
