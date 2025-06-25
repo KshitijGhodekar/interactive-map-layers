@@ -80,20 +80,29 @@ CSS Files:
 ---
 
  ### NOTE: Persisting User Settings (To save User Specific)
- 
-The `layerOpacity` and `activeSliderId` states represent user-specific settings for customizing the visibility and appearance of map layers. To maintain a consistent experience across   sessions and devices, these settings can be saved in a backend database linked to the user's account.
- 
- * Suggested Implementation:
- *  Store `layerOpacity` as a key-value mapping (layer ID → opacity) in the database.
- *  Optionally store `activeSliderId` to restore the currently open slider UI state.
- *  Trigger a save operation (e.g., API call) whenever the user changes a setting.
- *  Retrieve and apply these settings when the user logs in or revisits the map.
- 
- * Example (pseudo-code):
-   api.saveUserSettings(userId, { layerOpacity, activeSliderId });
-   const settings = api.loadUserSettings(userId);
-   setLayerOpacity(settings.layerOpacity);
-   setActiveSliderId(settings.activeSliderId);
- 
- * Alternatively, for single-device persistence without login, use `localStorage`.
+
+The `layerOpacity` and `activeSliderId` states enable users to customize the visibility and appearance of map layers. To maintain a consistent user experience across sessions and devices, these settings can be stored in a backend database associated with the user's account.
+
+### Suggested Implementation
+
+- **Persist `layerOpacity`** as a key-value mapping (e.g., `{ layerId: opacity }`) in the user’s settings table.
+- **Optionally store `activeSliderId`** to retain which slider is currently active.
+- **Trigger an API call** to save settings whenever the user makes changes.
+- **Retrieve and apply settings** when the user logs in or opens the map.
+- **Alternatively, for single-device persistence without login, use `localStorage`.
+
+### Example (Pseudo-code)
+
+```ts
+// Save user settings
+api.saveUserSettings(userId, {
+  layerOpacity,
+  activeSliderId,
+});
+
+// Load and apply settings
+const settings = await api.loadUserSettings(userId);
+setLayerOpacity(settings.layerOpacity);
+setActiveSliderId(settings.activeSliderId);
+
 
