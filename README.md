@@ -89,7 +89,7 @@ The `layerOpacity` and `activeSliderId` states enable users to customize the vis
 - **Optionally store `activeSliderId`** to retain which slider is currently active.
 - **Trigger an API call** to save settings whenever the user makes changes.
 - **Retrieve and apply settings** when the user logs in or opens the map.
-- **Alternatively, for single-device persistence without login, use `localStorage`.
+- **Alternatively**, for single-device persistence without login, use `localStorage`.
 
 ### Example (Pseudo-code)
 
