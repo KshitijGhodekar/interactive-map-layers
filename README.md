@@ -76,3 +76,33 @@ CSS Files:
 - GeoApp.css – layout and base styling
 - LayerItem.css – per-layer toggle, label, slider UI
 - LayerGroup.css – group collapse styles
+
+---
+
+ ### NOTE: Persisting User Settings (To save User Specific)
+
+The `layerOpacity` and `activeSliderId` states enable users to customize the visibility and appearance of map layers. To maintain a consistent user experience across sessions and devices, these settings can be stored in a backend database associated with the user's account.
+
+### Suggested Implementation
+
+- **Persist `layerOpacity`** as a key-value mapping (e.g., `{ layerId: opacity }`) in the user’s settings table.
+- **Optionally store `activeSliderId`** to retain which slider is currently active.
+- **Trigger an API call** to save settings whenever the user makes changes.
+- **Retrieve and apply settings** when the user logs in or opens the map.
+- **Alternatively**, for single-device persistence without login, use `localStorage`.
+
+### Example (Pseudo-code)
+
+```ts
+// Save user settings
+api.saveUserSettings(userId, {
+  layerOpacity,
+  activeSliderId,
+});
+
+// Load and apply settings
+const settings = await api.loadUserSettings(userId);
+setLayerOpacity(settings.layerOpacity);
+setActiveSliderId(settings.activeSliderId);
+
+
