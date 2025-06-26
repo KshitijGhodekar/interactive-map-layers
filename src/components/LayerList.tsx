@@ -16,7 +16,7 @@ interface Props {
   activeSliderId: string | null;
   toggleLayer: (id: string) => void;
   setActiveSliderId: React.Dispatch<React.SetStateAction<string | null>>;
-    updateOpacity: (id: string, value: number) => void;
+  updateOpacity: (id: string, value: number) => void;
 }
 
 const LayerList: React.FC<Props> = ({
@@ -29,38 +29,37 @@ const LayerList: React.FC<Props> = ({
   const renderLayerGroup = (groupName: string) => (
     <LayerGroup title={groupName} key={groupName}>
       {layers
-  .filter(layer => layer.group === groupName)
-  .map((layer, index, arr) => {
-    const position = arr.length - index;
-    return (
-      <SortableItem key={layer.id} id={layer.id}>
-        <LayerItem
-          id={layer.id}
-          name={layer.name}
-          enabled={layer.enabled}
-          opacity={layer.opacity}
-          isActive={activeSliderId === layer.id}
-          onToggle={() => toggleLayer(layer.id)}
-          onSliderToggle={() =>
-            setActiveSliderId(prev => (prev === layer.id ? null : layer.id))
-          }
-          onOpacityChange={(val) => updateOpacity(layer.id, val)}
-          index={position}
-        />
-      </SortableItem>
-    );
-  })}
+        .filter(layer => layer.group === groupName)
+        .map((layer, index, arr) => {
+          let positionLabel = '';
+          if (index === 0) positionLabel = 'Top Layer';
+          else if (index === arr.length - 1) positionLabel = 'Bottom Layer';
+          else positionLabel = 'Middle Layer';
 
+          return (
+            <SortableItem key={layer.id} id={layer.id}>
+              <LayerItem
+                id={layer.id}
+                name={layer.name}
+                enabled={layer.enabled}
+                opacity={layer.opacity}
+                isActive={activeSliderId === layer.id}
+                onToggle={() => toggleLayer(layer.id)}
+                onSliderToggle={() =>
+                  setActiveSliderId(prev => (prev === layer.id ? null : layer.id))
+                }
+                onOpacityChange={(val) => updateOpacity(layer.id, val)}
+                index={positionLabel}
+              />
+            </SortableItem>
+          );
+        })}
     </LayerGroup>
   );
 
   const groups = [...new Set(layers.map(layer => layer.group))];
 
-  return (
-    <>
-      {groups.map(group => renderLayerGroup(group))}
-    </>
-  );
+  return <>{groups.map(group => renderLayerGroup(group))}</>;
 };
 
 export default LayerList;

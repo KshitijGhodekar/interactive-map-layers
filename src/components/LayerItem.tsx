@@ -10,7 +10,7 @@ interface Props {
   onToggle: () => void;
   onSliderToggle: () => void;
   onOpacityChange: (value: number) => void;
-  index: number;
+  index: string;
 }
 
 const LayerItem: React.FC<Props> = ({
@@ -25,7 +25,7 @@ const LayerItem: React.FC<Props> = ({
   return (
     <div className="layer-item">
       <div className="layer-toggle">
-        <div className="layer-index">{index}</div>
+        <div className={`layer-index ${index.toLowerCase()}`}>{index}</div>
         <label className="switch">
           <input type="checkbox" checked={enabled} onChange={onToggle} />
           <span className="slider round"></span>
